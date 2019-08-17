@@ -10,14 +10,11 @@ export const fetchUsers = () => dispatch => {
       })
     );
 }
-export const addUser = () => dispatch => {
+export const addUser = (newUser) => dispatch => {
   axios.post('http://localhost:3001/users', {
-    name: 'name.redux',
-    lastname: 'lastname-redux',
-    email: 'email-redux'
-    // name: this.state.newUser.firstName,
-    // lastname: this.state.newUser.lastName,
-    // email: this.state.newUser.email
+    name: newUser.firstName,
+    lastname: newUser.lastName,
+    email: newUser.email
   })
     .then((response) => {
       dispatch({

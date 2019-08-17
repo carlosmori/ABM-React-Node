@@ -1,9 +1,23 @@
 import React, { Component } from 'react'
-import axios from 'axios';
+import { connect } from 'react-redux';
 import './addUser.css';
+import { addUser } from '../../actions/userActions';
 export class AddUser extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
+        this.state = {
+            firstName: '',
+            lastName: '',
+            email: ''
+        }
+    }
+    handleOnChangeInputs = (event) => {
+        this.setState({ [event.target.name]: event.target.value });
+    }
+    handleUserSubmit = (event) => {
+        event.preventDefault();
+        const newUser = { ...this.state };
+        this.props.addUser(newUser);
     }
     render() {
         return (
@@ -12,22 +26,21 @@ export class AddUser extends Component {
                     <div className="col">
                         <input type="text" name="firstName" id="firstName"
                             className="form-control" placeholder="First name"
-                            value={this.props.newUser.firstName}
-                            onChange={this.props.handleAddUserChange} />
+                            value={this.state.firstName}
+                            onChange={this.handleOnChangeInputs} />
                     </div>
                     <div className="col">
                         <input type="text" name="lastName" id="lastName" className="form-control" placeholder="Last name"
-                            value={this.props.newUser.lastName}
-                            onChange={this.props.handleAddUserChange} />
+                            value={this.state.lastName}
+                            onChange={this.handleOnChangeInputs} />
                     </div>
                     <div className="col">
                         <input type="email" name="email" id="email" className="form-control" placeholder="Email"
-
-                            value={this.props.newUser.email}
-                            onChange={this.props.handleAddUserChange} />
+                            value={this.state.email}
+                            onChange={this.handleOnChangeInputs} />
                     </div>
                     <div className="col">
-                        <button type="submit" className="btn btn-primary mb-2" onClick={this.props.handleUserSubmit}>Add User</button>
+                        <button type="submit" className="btn btn-primary mb-2" onClick={this.handleUserSubmit}>Add User</button>
                     </div>
                 </div>
             </form>
@@ -35,4 +48,8 @@ export class AddUser extends Component {
     }
 }
 
-export default AddUser
+const mapStateToProps = state => ({
+    //users: state.usersReducerState.usersFromRedux,
+});
+
+export default connect(mapStateToProps, { addUser })(AddUser)

@@ -19,31 +19,32 @@ export class App extends Component {
   }
   componentDidMount() {
   }
-  handleUserSubmit = (event) => {
-    event.preventDefault();
-    axios.post('http://localhost:3001/users', {
-      name: this.state.newUser.firstName,
-      lastname: this.state.newUser.lastName,
-      email: this.state.newUser.email
-    })
-      .then((response) => {
-        this.setState({
-          users: [...this.state.users, response.data]
-        })
-      })
-      .catch((error) => {
-        console.log('error');
-        console.log(error);
-      });
-  }
-  handleAddUserChange = (event) => {
-    this.setState({ newUser: { ...this.state.newUser, [event.target.name]: event.target.value } });
-  }
+  // handleUserSubmit = (event) => {
+  //   event.preventDefault();
+  //   axios.post('http://localhost:3001/users', {
+  //     name: this.state.newUser.firstName,
+  //     lastname: this.state.newUser.lastName,
+  //     email: this.state.newUser.email
+  //   })
+  //     .then((response) => {
+  //       this.setState({
+  //         users: [...this.state.users, response.data]
+  //       })
+  //     })
+  //     .catch((error) => {
+  //       console.log('error');
+  //       console.log(error);
+  //     });
+  // }
+  // handleAddUserChange = (event) => {
+  //   this.setState({ newUser: { ...this.state.newUser, [event.target.name]: event.target.value } });
+  // }
   render() {
     return (
       <Provider store={store}>
         <div>
-          <AddUser newUser={this.state.newUser} handleAddUserChange={this.handleAddUserChange} handleUserSubmit={this.handleUserSubmit} />
+          {/* <AddUser newUser={this.state.newUser} handleAddUserChange={this.handleAddUserChange} handleUserSubmit={this.handleUserSubmit} /> */}
+          <AddUser />
           <UserList />
         </div>
       </Provider>

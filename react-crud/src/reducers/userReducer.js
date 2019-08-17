@@ -14,7 +14,8 @@ export default function (state = initialState, action) {
         case ADD_USER:
             return {
                 ...state,
-                newUserFromRedux: action.payload
+                newUserFromRedux: action.payload,
+                usersFromRedux: [...state.usersFromRedux , action.payload]
             };
         default:
             return state;

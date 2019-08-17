@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import { Provider } from 'react-redux';
 import UserList from './components/userList/userList';
 import AddUser from './components/addUser/addUser';
+import store from './store';
 
 export class App extends Component {
   constructor(props) {
@@ -16,11 +18,6 @@ export class App extends Component {
     }
   }
   componentDidMount() {
-    axios.get(`http://localhost:3001/users`)
-      .then(res => {
-        const users = res.data;
-        this.setState({ users });
-      })
   }
   handleUserSubmit = (event) => {
     event.preventDefault();
@@ -30,9 +27,8 @@ export class App extends Component {
       email: this.state.newUser.email
     })
       .then((response) => {
-        console.log(response.data);
         this.setState({
-          users : [...this.state.users, response.data]
+          users: [...this.state.users, response.data]
         })
       })
       .catch((error) => {
@@ -42,16 +38,15 @@ export class App extends Component {
   }
   handleAddUserChange = (event) => {
     this.setState({ newUser: { ...this.state.newUser, [event.target.name]: event.target.value } });
-    //this.setState({ newUser: event.target.value });
-    console.log('event');
-    console.log(event);
   }
   render() {
     return (
-      <div>
-        <AddUser newUser={this.state.newUser} handleAddUserChange={this.handleAddUserChange} handleUserSubmit={this.handleUserSubmit} />
-        <UserList users={this.state.users} />
-      </div>
+      <Provider store={store}>
+        <div>
+          <AddUser newUser={this.state.newUser} handleAddUserChange={this.handleAddUserChange} handleUserSubmit={this.handleUserSubmit} />
+          <UserList />
+        </div>
+      </Provider>
     )
   }
 }

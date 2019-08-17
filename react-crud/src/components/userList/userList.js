@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import User from '../user/user';
-
+import { fetchUsers } from '../../actions/userActions';
+import { connect } from 'react-redux';
 export class UserList extends Component {
+    componentDidMount() {
+        this.props.fetchUsers();
+    }
     render() {
         return (
             <table className="table">
@@ -23,4 +27,8 @@ export class UserList extends Component {
     }
 }
 
-export default UserList
+const mapStateToProps = state => ({
+    users: state.usersReducerState.usersFromRedux,
+});
+
+export default connect(mapStateToProps, { fetchUsers })(UserList)

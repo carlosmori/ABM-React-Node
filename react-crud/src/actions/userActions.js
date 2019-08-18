@@ -1,4 +1,4 @@
-import { FETCH_USERS, ADD_USER } from './types.js';
+import { FETCH_USERS, ADD_USER, DELETE_USER } from './types.js';
 import axios from 'axios';
 
 export const fetchUsers = () => dispatch => {
@@ -20,6 +20,23 @@ export const addUser = (newUser) => dispatch => {
       dispatch({
         type: ADD_USER,
         payload: response.data
+      })
+    })
+    .catch((error) => {
+      console.log('error');
+      console.log(error);
+    });
+}
+export const deleteUser = (userId) => dispatch => {
+  axios.delete('http://localhost:3001/users', {
+    data: {
+      id: userId
+    }
+  })
+    .then((response) => {
+      dispatch({
+        type: DELETE_USER,
+        payload: userId
       })
     })
     .catch((error) => {

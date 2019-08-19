@@ -3,28 +3,22 @@ import { Provider } from 'react-redux';
 import UserList from './components/userList/userList';
 import AddUser from './components/addUser/addUser';
 import store from './store';
+import UsersForm from './components/userForm/userForm';
 
 export class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      users: [],
-      newUser: {
-        firstName: '',
-        lastName: '',
-        email: ''
-      }
-    }
   }
+
+  submit = values => {
+    // print the form values to the console
+    console.log(values)
+  };
   render() {
-    console.log('%c __________Debug__________ ' , 'background: #028286;color:#FFF;border-radius: 5px;line-height: 26px');
-    console.log(this);
-    console.log('%c __________Debug__________ ' , 'background: #028286;color:#FFF;border-radius: 5px;line-height: 26px');
     return (
       <Provider store={store}>
         <div>
-          {/* <AddUser newUser={this.state.newUser} handleAddUserChange={this.handleAddUserChange} handleUserSubmit={this.handleUserSubmit} /> */}
-          <AddUser />
+          <UsersForm onSubmit={this.submit} />
           <UserList />
         </div>
       </Provider>

@@ -1,4 +1,10 @@
-import { FETCH_USERS, ADD_USER, DELETE_USER, SET_CURRENT_USER, UPDATE_USER } from "./types.js";
+import {
+  FETCH_USERS,
+  ADD_USER,
+  DELETE_USER,
+  SET_CURRENT_USER,
+  UPDATE_USER
+} from "./types.js";
 import axios from "axios";
 
 export const fetchUsers = () => dispatch => {
@@ -12,8 +18,8 @@ export const fetchUsers = () => dispatch => {
 export const addUser = newUser => dispatch => {
   axios
     .post("http://localhost:3001/users", {
-      name: newUser.firstName,
-      lastname: newUser.lastName,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
       email: newUser.email
     })
     .then(response => {
@@ -56,8 +62,8 @@ export const updateUser = newUser => dispatch => {
   axios
     .put("http://localhost:3001/users", {
       id: newUser.id,
-      name: newUser.firstName,
-      lastname: newUser.lastName,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
       email: newUser.email
     })
     .then(response => {

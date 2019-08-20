@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { deleteUser } from '../../actions/userActions';
+import { deleteUser , setCurrentUser } from '../../actions/userActions';
+import './user.css';
 export class User extends Component {
     deleteUser = () => {
-        alert('Hola');
         this.props.deleteUser(this.props.user.id);
+    }
+    updateUser = () => {
+        this.props.setCurrentUser(this.props.user);
     }
     render() {
         return (
@@ -15,6 +18,7 @@ export class User extends Component {
                 <td>{this.props.user.email}</td>
                 <td>
                     <button type="button" className="btn btn-danger" onClick={this.deleteUser}>Delete</button>
+                    <button type="button" className="btn btn-success" onClick={this.updateUser}>Update</button>
                 </td>
             </tr>
         )
@@ -25,4 +29,4 @@ export class User extends Component {
 const mapStateToProps = state => ({
 
 });
-export default connect(mapStateToProps, { deleteUser })(User)
+export default connect(mapStateToProps, { deleteUser , setCurrentUser })(User)

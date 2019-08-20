@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { Provider } from 'react-redux';
-import UserList from './components/userList/userList';
-import AddUser from './components/addUser/addUser';
-import store from './store';
+import React, { Component } from "react";
+import { Provider } from "react-redux";
+import UserList from "./components/userList/userList";
+import AddUser from "./components/addUser/addUser";
+import store from "./store";
 
 export class App extends Component {
   constructor(props) {
@@ -10,16 +10,13 @@ export class App extends Component {
     this.state = {
       users: [],
       newUser: {
-        firstName: '',
-        lastName: '',
-        email: ''
+        firstName: "",
+        lastName: "",
+        email: ""
       }
-    }
+    };
   }
   render() {
-    console.log('%c __________Debug__________ ' , 'background: #028286;color:#FFF;border-radius: 5px;line-height: 26px');
-    console.log(this);
-    console.log('%c __________Debug__________ ' , 'background: #028286;color:#FFF;border-radius: 5px;line-height: 26px');
     return (
       <Provider store={store}>
         <div>
@@ -28,8 +25,8 @@ export class App extends Component {
           <UserList />
         </div>
       </Provider>
-    )
+    );
   }
 }
 
-export default App
+export default App;

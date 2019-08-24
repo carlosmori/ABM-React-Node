@@ -1,53 +1,73 @@
 const User = require("../models").User;
 module.exports = {
   //Get all
-  getAll(req, res) {
-    return User.findAll({})
-      .then(result => res.status(200).send(result))
-      .catch(error => res.status(400).send(error));
+  async getAll(req, res) {
+    try {
+      const users = await User.findAll({});
+      return res.status(200).json(users);
+    } catch (error) {
+      return res.status(500).json({ error: error.toString() });
+    }
   },
   //Get one
-  getOne(req, res) {
-    return User.findAll({
-      limit: 1,
-      where: {
-        id: req.params.id //your where conditions, or without them if you need ANY entry
-      }
-    })
-      .then(result => res.status(200).send(result))
-      .catch(error => res.status(400).send(error));
+  async getOne(req, res) {
+    try {
+      const { id } = req.params;
+      const user = await User.findOne({
+        where: { id }
+      });
+      return res.status(200).json(user);
+    } catch (error) {
+      return res.status(500).json({ error: error.toString() });
+    }
   },
   // Create One
-  create(req, res) {
-    return User.create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email
-    })
-      .then(User => res.status(201).send(User))
-      .catch(error => res.status(400).send(error));
+  async create(req, res) {
+    try {
+      const { firstName, lastName, email } = req.body;
+      const userCreated = await User.create({
+        firstName,
+        lastName,
+        email
+      });
+      return res.status(201).json(userCreated);
+    } catch (error) {
+      return res.status(500).json({ error: error.toString() });
+    }
   },
   // Delete one
-  delete(req, res) {
-    return User.destroy({
-      where: {
-        id: req.body.id //your where conditions, or without them if you need ANY entry
-      }
-    })
-      .then(result => res.sendStatus(200).send(result))
-      .catch(error => res.status(400).send(error));
+  async delete(req, res) {
+    try {
+      const { id } = req.body;
+      const deletedUser = await User.destroy({
+        where: { id }
+      });
+      const response = deletedUser
+        ? `User with id ${id} deleted successfully`
+        : `No user found that matched provided criteria`;
+      return res.status(200).json(response);
+    } catch (error) {
+      return res.status(500).json({ error: error.toString() });
+    }
   },
   // Update one
-  update(req, res) {
-    return User.update(
-      {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email
-      },
-      { where: { id: req.body.id } }
-    )
-      .then(result => res.status(200).send(result))
-      .catch(error => res.status(400).send(error));
+  async update(req, res) {
+    try {
+      const { firstName, lastName, email, id } = req.body;
+      const userUpdated = await User.update(
+        {
+          firstName,
+          lastName,
+          email
+        },
+        { where: { id } }
+      );
+      const response = userUpdated[0]
+        ? `User with id ${id} updated successfully`
+        : `No user found that matched provided criteria`;
+      return res.status(201).json(response);
+    } catch (error) {
+      return res.status(500).json({ error: error.toString() });
+    }
   }
 };

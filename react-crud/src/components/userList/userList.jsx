@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import User from "../user/user";
 import { fetchUsers, setCurrentUser } from "../../actions/userActions";
+
 import { connect } from "react-redux";
+import { FETCH_USERS } from "../../actions/types";
 
 export class UserList extends Component {
   componentDidMount() {
@@ -59,7 +61,6 @@ export class UserList extends Component {
 const mapStateToProps = state => ({
   users: state.usersReducerState.usersFromRedux
 });
-
 export default connect(
   mapStateToProps,
   { fetchUsers, setCurrentUser }

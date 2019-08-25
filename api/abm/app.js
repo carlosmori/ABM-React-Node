@@ -1,44 +1,19 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
+const passport = require("passport");
+const cors = require("cors");
 
 //Routers
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
-var userCredentialsRouter = require("./routes/user-credentials");
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
+const userCredentialsRouter = require("./routes/user-credentials");
 
-// import passport and passport-jwt modules
-const passport = require("passport");
-const passportJWT = require("passport-jwt");
-
-// ExtractJwt to help extract the token
-let ExtractJwt = passportJWT.ExtractJwt;
-
-// JwtStrategy which is the strategy for the authentication
-let JwtStrategy = passportJWT.Strategy;
-let jwtOptions = {};
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = "1234";
-// lets create our strategy for web token
-let strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
-  console.log("payload received", jwt_payload);
-  let user = getUser({ id: jwt_payload.id });
-  if (user) {
-    next(null, user);
-  } else {
-    next(null, false);
-  }
-});
-// use the strategy
-passport.use(strategy);
-
-const cors = require("cors");
-var app = express();
+const app = express();
 
 app.use(cors());
-app.use(passport.initialize());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -50,10 +25,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/userCredentials", userCredentialsRouter);
+app.use(passport.initialize());
+require("./passport-config")(passport);
 
+app.use("/", indexRouter);
+app.use(
+  "/users",
+  passport.authenticate("jwt", { session: false }),
+  usersRouter
+);
+app.use("/userCredentials", userCredentialsRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -71,3 +52,12 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+//custom Middleware for logging the each request going to the API
+// app.use((req,res,next) => {
+//   if (req.body) log.info(req.body);
+//   if (req.params) log.info(req.params);
+//   if(req.query) log.info(req.query);
+//   log.info(`Received a ${req.method} request from ${req.ip} for                ${req.url}`);
+// next();
+// });

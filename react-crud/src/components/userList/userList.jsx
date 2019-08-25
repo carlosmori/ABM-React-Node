@@ -13,7 +13,7 @@ export class UserList extends Component {
   };
   render() {
     return (
-      <div className="container">
+      <div>
         <div className="row">
           <div className="col-lg-12">
             <button

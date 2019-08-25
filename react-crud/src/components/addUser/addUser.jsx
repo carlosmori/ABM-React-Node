@@ -40,7 +40,7 @@ export class AddUser extends Component {
     this.navigateHome();
   };
   navigateHome = () => {
-    this.props.history.push("/");
+    this.props.history.push("/userList");
   };
   render() {
     return (

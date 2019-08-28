@@ -4,6 +4,7 @@ import createSagaMiddleware from "redux-saga";
 import rootReducer from "./reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
 import rootSaga from "./sagas/index";
+
 const initialState = {};
 
 // create the saga middleware

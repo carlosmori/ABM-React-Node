@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import User from "../user/user";
 import { fetchUsers, setCurrentUser } from "../../actions/userActions";
-
 import { connect } from "react-redux";
-import { FETCH_USERS } from "../../actions/types";
 
 export class UserList extends Component {
   componentDidMount() {
@@ -11,18 +9,14 @@ export class UserList extends Component {
   }
   addUser = () => {
     this.props.setCurrentUser({ action: "Add User" });
-    this.props.history.push("/addUser");
+    this.props.history.push("/welcome/addUser");
   };
   render() {
     return (
       <div>
         <div className="row">
           <div className="col-lg-12">
-            <button
-              className="btn btn-success"
-              onClick={this.addUser}
-              style={{ float: "right" }}
-            >
+            <button className="btn btn-success" onClick={this.addUser}>
               Add User
             </button>
           </div>
@@ -59,7 +53,8 @@ export class UserList extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.usersReducerState.usersFromRedux
+  users: state.usersReducerState.usersFromRedux,
+  session: state.sessionReducerState.session
 });
 export default connect(
   mapStateToProps,

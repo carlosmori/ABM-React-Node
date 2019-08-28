@@ -1,12 +1,4 @@
-//passport-config.js
-//Let's import some things!
 const { Strategy, ExtractJwt } = require("passport-jwt");
-//this is using ES6 Destructuring. If you're not using a build step,
-//this could cause issues and is equivalent to
-// const pp-jwt = require('passport-jwt');
-// const Strategy = pp-jwt.Strategy;
-// const ExtractJwt = pp-jwt.ExtractJwt;
-// require("dotenv").config();
 const secret = process.env.SECRET || "1234";
 const userCredentials = require("./models").userCredentials;
 

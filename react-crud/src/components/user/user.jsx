@@ -8,7 +8,7 @@ export class User extends Component {
   };
   updateUser = () => {
     this.props.setCurrentUser({ ...this.props.user, action: "Update" });
-    this.props.history.push("/addUser");
+    this.props.history.push("/welcome/addUser");
   };
   render() {
     return (

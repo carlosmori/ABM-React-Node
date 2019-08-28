@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./login.scss";
 import { connect } from "react-redux";
-
+import { logIn } from "../../actions/sessionActions.js";
 export class Login extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +17,14 @@ export class Login extends Component {
   };
   logIn = event => {
     event.preventDefault();
+    const credentials = { ...this.state };
+    this.props.logIn(credentials);
   };
+  componentDidUpdate(prevProps) {
+    if (this.props.session.userLogged) {
+      this.props.history.push("/welcome/userList");
+    }
+  }
   render() {
     return (
       <div className="bg">
@@ -48,14 +55,15 @@ export class Login extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group form-check">
+            {/* TODO implement remember me functionallity */}
+            {/* <div className="form-group form-check">
               <input
                 type="checkbox"
                 className="form-check-input"
                 id="exampleCheck1"
               />
               <label className="form-check-label">Remember me</label>
-            </div>
+            </div> */}
             <button
               type="submit"
               className="btn btn-primary"
@@ -70,8 +78,10 @@ export class Login extends Component {
     );
   }
 }
-const mapStateToProps = state => {};
+const mapStateToProps = state => ({
+  session: state.sessionReducerState.session
+});
 export default connect(
   mapStateToProps,
-  {}
+  { logIn }
 )(Login);

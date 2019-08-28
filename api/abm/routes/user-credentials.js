@@ -18,5 +18,4 @@ router.post(
 );
 router.get("/:id", wrapAsync(userCredentialsController.getUserCredentials));
 router.get("/", wrapAsync(userCredentialsController.getAllUserCredentials));
-//router.get("/",passport.authenticate('jwt', {session: false}) ,wrapAsync(userCredentialsController.getAllUserCredentials));
 module.exports = router;

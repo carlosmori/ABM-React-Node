@@ -1,0 +1,19 @@
+.bg {
+    height: 100vh;
+    width: 100vw;
+    background-image: url('../../assets/bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    form {
+        color: white;
+        width: 25%;
+        margin: 0 auto;
+        padding-top: 10%;
+
+        .btn {
+            width: 100%;
+        }
+    }
+}

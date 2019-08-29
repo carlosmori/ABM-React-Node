@@ -11,6 +11,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
+  //Igualar a null a ver que pasa
   newUserFromRedux: {
     action: "",
     firstName: "",
@@ -19,67 +20,43 @@ const initialState = {
   },
   usersFromRedux: []
 };
-export default function(state = initialState, action) {
-  switch (action.type) {
+//refactorear a arrow function
+//export default (state = initialState, action) => {
+
+export default function(state = initialState, { type, payload }) {
+  switch (type) {
     case FETCH_USERS_SUCCESS:
       return {
         ...state,
-        usersFromRedux: action.payload
+        usersFromRedux: payload
       };
     case ADD_USER_SUCCESS:
       return {
         ...state,
-        usersFromRedux: [...state.usersFromRedux, action.payload]
+        usersFromRedux: [...state.usersFromRedux, payload]
       };
     case DELETE_USER_SUCCESS:
       return {
         ...state,
         usersFromRedux: [...state.usersFromRedux].filter(
-          user => user.id !== action.payload
+          user => user.id !== payload
         )
       };
     case SET_CURRENT_USER:
       return {
         ...state,
-        newUserFromRedux: action.payload
+        newUserFromRedux: payload
       };
     case UPDATE_USER_SUCCESS:
       let { usersFromRedux } = state;
       const oldUserIndex = usersFromRedux.findIndex(
-        user => user.id === action.payload.id
+        user => user.id === payload.id
       );
-      usersFromRedux[oldUserIndex] = action.payload;
+      usersFromRedux[oldUserIndex] = payload;
       return {
         ...state,
         usersFromRedux: [...usersFromRedux]
       };
-    // case UPDATE_USER:
-    //   let { usersFromRedux } = state;
-    //   const oldUserIndex = usersFromRedux.findIndex(
-    //     user => user.id === action.payload.id
-    //   );
-    //   usersFromRedux[oldUserIndex] = action.payload;
-    //   return {
-    //     ...state,
-    //     usersFromRedux: [...usersFromRedux]
-    //   };
-    // case FETCH_USERS:
-    //   return {
-    //     ...state,
-    //     usersFromRedux: action.payload
-    //   };
-    // case ADD_USER:
-    //   return {
-    //     ...state,
-    //     usersFromRedux: [...state.usersFromRedux, action.payload]
-    //   };
-    // case DELETE_USER:
-    //   return {
-    //     ...state,
-    //     usersFromRedux: [...state.usersFromRedux].filter(
-    //       user => user.id !== action.payload
-    //     )
-    //   };
     default:
       return state;
   }

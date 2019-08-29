@@ -1,12 +1,14 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import userList from "../components/userList/userList";
-import addUser from "../components/addUser/addUser";
+import Login from "../components/login/login.jsx";
+import PrivateRoute from "./private-route";
+import welcome from "../components/welcome/welcome";
 const Routes = () => {
   return (
+    // La solucion es otro router
     <div>
-      <Route exact path="/" component={userList} />
-      <Route path="/addUser" component={addUser} />
+      <Route exact path="/" component={Login} />
+      <PrivateRoute path="/welcome" component={welcome} />
     </div>
   );
 };

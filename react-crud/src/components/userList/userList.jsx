@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import User from "../user/user";
 import { fetchUsers, setCurrentUser } from "../../actions/userActions";
 import { connect } from "react-redux";
+import { push } from "connected-react-router";
 
 export class UserList extends Component {
   componentDidMount() {
@@ -9,7 +10,7 @@ export class UserList extends Component {
   }
   addUser = () => {
     this.props.setCurrentUser({ action: "Add User" });
-    this.props.history.push("/welcome/addUser");
+    this.props.push("/welcome/addUser");
   };
   render() {
     return (
@@ -58,5 +59,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { fetchUsers, setCurrentUser }
+  { fetchUsers, setCurrentUser, push }
 )(UserList);

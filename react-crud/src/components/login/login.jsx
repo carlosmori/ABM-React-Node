@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import "./login.scss";
 import { connect } from "react-redux";
 import { logIn } from "../../actions/sessionActions.js";
+import { push } from "connected-react-router";
+
 export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      password: ""
+      name: null,
+      password: null
     };
   }
   handleChange = event => {
@@ -20,9 +22,9 @@ export class Login extends Component {
     const credentials = { ...this.state };
     this.props.logIn(credentials);
   };
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
     if (this.props.session.userLogged) {
-      this.props.history.push("/welcome/userList");
+      this.props.push("/welcome/userList");
     }
   }
   render() {
@@ -83,5 +85,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { logIn }
+  { logIn, push }
 )(Login);

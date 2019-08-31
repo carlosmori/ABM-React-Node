@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { deleteUser, setCurrentUser } from "../../actions/userActions";
+import { push } from "connected-react-router";
+
 import "./user.css";
 export class User extends Component {
   deleteUser = () => {
@@ -8,7 +10,7 @@ export class User extends Component {
   };
   updateUser = () => {
     this.props.setCurrentUser({ ...this.props.user, action: "Update" });
-    this.props.history.push("/welcome/addUser");
+    this.props.push("/welcome/addUser");
   };
   render() {
     return (
@@ -41,5 +43,5 @@ export class User extends Component {
 const mapStateToProps = state => ({});
 export default connect(
   mapStateToProps,
-  { deleteUser, setCurrentUser }
+  { deleteUser, setCurrentUser, push }
 )(User);

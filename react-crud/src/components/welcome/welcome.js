@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import AddUser from "../addUser/addUser";
 import userList from "../userList/userList";
 
-function Welcome(props) {
+function Welcome() {
   return (
     <div>
       <Route path="/welcome" component={Header} />

@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./addUser.css";
 import { addUser, updateUser } from "../../actions/userActions";
+import { push } from "connected-react-router";
 
 export class AddUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
       id: undefined,
-      firstName: "",
-      lastName: "",
-      email: ""
+      firstName: null,
+      lastName: null,
+      email: null
     };
   }
   componentDidMount() {
@@ -37,10 +38,6 @@ export class AddUser extends Component {
     this.props.user.action === "Add User"
       ? this.props.addUser(newUser)
       : this.props.updateUser(newUser);
-    this.navigateHome();
-  };
-  navigateHome = () => {
-    this.props.history.push("/welcome/userList");
   };
   render() {
     return (
@@ -49,7 +46,7 @@ export class AddUser extends Component {
           <div className="col-lg-12">
             <button
               className="btn btn-success"
-              onClick={this.navigateHome}
+              onClick={() => this.props.push("/welcome/userList")}
               style={{ float: "right" }}
             >
               User List
@@ -118,5 +115,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addUser, updateUser }
+  { addUser, updateUser, push }
 )(AddUser);

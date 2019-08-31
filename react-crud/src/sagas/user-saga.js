@@ -3,7 +3,7 @@
  * @desc User
  */
 
-import { all, call, put, takeLatest, select } from "redux-saga/effects";
+import { all, call, put, takeLatest } from "redux-saga/effects";
 import { http } from "../utils/authentication";
 import {
   FETCH_USERS,
@@ -14,13 +14,13 @@ import {
   DELETE_USER_SUCCESS,
   ADD_USER_SUCCESS
 } from "../actions/types";
+import { push } from "connected-react-router";
+
 /**
  * Login
  */
 export function* fetchUsers() {
   try {
-    const getToken = state => state.sessionReducerState.token;
-    // ...
     const response = yield call(fetchUserAxios);
     //users
     const payload = response.data;
@@ -39,6 +39,7 @@ export function* addUser(action) {
     const payload = response.data;
     // dispatch a success action to the store with the new dog
     yield put({ type: ADD_USER_SUCCESS, payload });
+    yield put(push("/welcome/userList"));
   } catch (error) {
     // dispatch a failure action to the store with the error
     yield put({ type: "API_CALL_FAILURE", error });
@@ -46,7 +47,7 @@ export function* addUser(action) {
 }
 export function* deleteUser(action) {
   try {
-    const response = yield call(deleteUserAxios, action.payload);
+    yield call(deleteUserAxios, action.payload);
     //users
     const payload = action.payload;
     // dispatch a success action to the store with the new dog
@@ -58,11 +59,12 @@ export function* deleteUser(action) {
 }
 export function* updateUser(action) {
   try {
-    const response = yield call(updateUserAxios, action.payload);
+    yield call(updateUserAxios, action.payload);
     //users
     const payload = action.payload;
     // dispatch a success action to the store with the new dog
     yield put({ type: UPDATE_USER_SUCCESS, payload });
+    yield put(push("/welcome/userList"));
   } catch (error) {
     // dispatch a failure action to the store with the error
     yield put({ type: "API_CALL_FAILURE", error });

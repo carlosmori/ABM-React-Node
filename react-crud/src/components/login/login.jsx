@@ -8,8 +8,8 @@ export class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: null,
-      password: null
+      name: "",
+      password: ""
     };
   }
   handleChange = event => {

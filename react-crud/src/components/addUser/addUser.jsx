@@ -9,9 +9,9 @@ export class AddUser extends Component {
     super(props);
     this.state = {
       id: undefined,
-      firstName: null,
-      lastName: null,
-      email: null
+      firstName: "",
+      lastName: "",
+      email: ""
     };
   }
   componentDidMount() {

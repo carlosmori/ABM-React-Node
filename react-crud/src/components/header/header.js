@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { unSetAuthorization } from "../../utils/authentication";
+import { logOut } from "../../actions/sessionActions";
+import { connect } from "react-redux";
 export class Header extends Component {
   logout = () => {
-    this.props.history.push("/");
     unSetAuthorization();
+    this.props.logOut();
+    this.props.history.push("/");
   };
 
   render() {
@@ -17,4 +20,7 @@ export class Header extends Component {
   }
 }
 
-export default Header;
+export default connect(
+  null,
+  { logOut }
+)(Header);

@@ -1,4 +1,4 @@
-import { LOG_IN_SUCCESS } from "../actions/types";
+import { LOG_IN_SUCCESS, LOGOUT } from "../actions/types";
 const initialState = {
   session: {
     name: "",
@@ -18,6 +18,16 @@ export default function(state = initialState, action) {
           name,
           token,
           userLogged: true
+        }
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        session: {
+          ...state.session,
+          name: null,
+          token: null,
+          userLogged: false
         }
       };
     default:

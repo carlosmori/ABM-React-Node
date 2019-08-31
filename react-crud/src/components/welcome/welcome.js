@@ -1,16 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import Header from "../header/header";
-import { Route, BrowserRouter, Switch } from "react-router-dom";
-import { addUser } from "../../sagas/user-saga";
+import { Route } from "react-router-dom";
+import AddUser from "../addUser/addUser";
 import userList from "../userList/userList";
-import PrivateRoute from "../../routes/private-route";
 
 function Welcome(props) {
   return (
     <div>
       <Route path="/welcome" component={Header} />
       <Route path="/welcome/userList" component={userList} />
-      <Route path="/welcome/addUser" component={addUser} />
+      <Route path="/welcome/addUser" component={AddUser} />
     </div>
   );
 }

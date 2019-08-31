@@ -1,9 +1,5 @@
 import {
-  FETCH_USERS,
-  ADD_USER,
-  DELETE_USER,
   SET_CURRENT_USER,
-  UPDATE_USER,
   FETCH_USERS_SUCCESS,
   ADD_USER_SUCCESS,
   DELETE_USER_SUCCESS,
@@ -13,10 +9,10 @@ import {
 const initialState = {
   //Igualar a null a ver que pasa
   newUserFromRedux: {
-    action: "",
-    firstName: "",
-    lastName: "",
-    email: ""
+    action: null,
+    firstName: null,
+    lastName: null,
+    email: null
   },
   usersFromRedux: []
 };

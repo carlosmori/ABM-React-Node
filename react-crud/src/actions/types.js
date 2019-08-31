@@ -10,6 +10,7 @@ export const UPDATE_USER = "UPDATE_USER";
 export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
 //SESION
 export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
 export const SET_TOKEN = "SET_TOKEN";
 

@@ -1,28 +1,24 @@
-import React, { Component } from "react";
+import React from "react";
 import { unSetAuthorization } from "../../utils/authentication";
 import { logOut } from "../../actions/sessionActions";
-import { connect } from "react-redux";
 import { push } from "connected-react-router";
+import { useDispatch } from "react-redux";
 
-export class Header extends Component {
-  logout = () => {
+const Header = () => {
+  const dispatch = useDispatch();
+
+  const logout = () => {
     unSetAuthorization();
-    this.props.logOut();
-    this.props.push("/");
+    dispatch(logOut());
+    dispatch(push("/"));
   };
+  return (
+    <div style={{ textAlign: "right" }}>
+      <button onClick={logout} className="btn btn-dark">
+        Logout
+      </button>
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div style={{ textAlign: "right" }}>
-        <button onClick={this.logout} className="btn btn-dark">
-          Logout
-        </button>
-      </div>
-    );
-  }
-}
-
-export default connect(
-  null,
-  { logOut, push }
-)(Header);
+export default Header;

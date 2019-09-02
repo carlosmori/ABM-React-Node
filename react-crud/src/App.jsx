@@ -20,10 +20,6 @@ export class App extends Component {
           <Router history={history}>
             <Routes />
           </Router>
-          {/* <Switch>
-            <Route exact path="/" render={() => <div>Match</div>} />
-            <Route render={() => <div>Miss</div>} />
-          </Switch> */}
         </ConnectedRouter>
       </Provider>
     );

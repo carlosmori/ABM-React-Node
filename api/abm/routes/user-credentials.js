@@ -11,11 +11,7 @@ function wrapAsync(fn) {
   };
 }
 const userCredentialsController = require("../controller/user-credentials-controller");
-router.post(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  wrapAsync(userCredentialsController.createUser)
-);
+router.post("/", wrapAsync(userCredentialsController.createUser));
 router.get("/:id", wrapAsync(userCredentialsController.getUserCredentials));
 router.get("/", wrapAsync(userCredentialsController.getAllUserCredentials));
 module.exports = router;

@@ -1,5 +1,5 @@
 node_modules
-api\node_modules\.bin\atob
+api\abm\node_modules
 # Logs
 logs
 *.log

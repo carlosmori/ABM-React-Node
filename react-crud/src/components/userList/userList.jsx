@@ -10,7 +10,7 @@ const UserList = props => {
 
   useEffect(() => {
     dispatch(fetchUsers());
-  });
+  }, []);
 
   const addUser = () => {
     dispatch(setCurrentUser({ action: "Add User" }));
@@ -38,6 +38,7 @@ const UserList = props => {
               </tr>
             </thead>
             <tbody>
+              {/* @todo , refactor no se usa index como key. Se usa un objeto del user (id) */}
               {users.map((user, index) => {
                 return <User key={index} user={user} history={props.history} />;
               })}

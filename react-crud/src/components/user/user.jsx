@@ -1,47 +1,36 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import { deleteUser, setCurrentUser } from "../../actions/userActions";
 import { push } from "connected-react-router";
-
+import { useDispatch } from "react-redux";
 import "./user.css";
-export class User extends Component {
-  deleteUser = () => {
-    this.props.deleteUser(this.props.user.id);
-  };
-  updateUser = () => {
-    this.props.setCurrentUser({ ...this.props.user, action: "Update" });
-    this.props.push("/welcome/addUser");
-  };
-  render() {
-    return (
-      <tr>
-        <th scope="row">{this.props.user.id}</th>
-        <td>{this.props.user.firstName}</td>
-        <td>{this.props.user.lastName}</td>
-        <td>{this.props.user.email}</td>
-        <td>
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={this.deleteUser}
-          >
-            Delete
-          </button>
-          <button
-            type="button"
-            className="btn btn-info"
-            onClick={this.updateUser}
-          >
-            Update
-          </button>
-        </td>
-      </tr>
-    );
-  }
-}
 
-const mapStateToProps = state => ({});
-export default connect(
-  mapStateToProps,
-  { deleteUser, setCurrentUser, push }
-)(User);
+const User = props => {
+  const dispatch = useDispatch();
+
+  const updateUser = () => {
+    dispatch(setCurrentUser({ ...props.user, action: "Update" }));
+    dispatch(push("/welcome/addUser"));
+  };
+  return (
+    <tr>
+      <th scope="row">{props.user.id}</th>
+      <td>{props.user.firstName}</td>
+      <td>{props.user.lastName}</td>
+      <td>{props.user.email}</td>
+      <td>
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={() => dispatch(deleteUser(props.user.id))}
+        >
+          Delete
+        </button>
+        <button type="button" className="btn btn-info" onClick={updateUser}>
+          Update
+        </button>
+      </td>
+    </tr>
+  );
+};
+
+export default User;

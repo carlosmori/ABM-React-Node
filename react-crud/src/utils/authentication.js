@@ -31,7 +31,8 @@ const unSetAuthorization = authorization => {
   localStorage.removeItem(AUTHORIZATION_KEY_NAME);
 };
 
-const getToken = authorization => {
+// @todo isLoggedIn()
+const getToken = () => {
   return localStorage.getItem(AUTHORIZATION_KEY_NAME);
   // return userLogged ? true : false;
 };

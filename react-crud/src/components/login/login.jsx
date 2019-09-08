@@ -5,19 +5,18 @@ import { push } from "connected-react-router";
 import { useDispatch } from "react-redux";
 import { getToken } from "../../utils/authentication";
 
-const Login = props => {
+const Login = () => {
   const dispatch = useDispatch();
 
-  const [values, setValues] = useState({ name: "", password: "" });
+  const [formValues, setValues] = useState({ name: "", password: "" });
 
   const handleSubmit = event => {
     event.preventDefault();
-    const credentials = { ...values };
-    dispatch(logIn(credentials));
+    dispatch(logIn({ ...formValues }));
   };
   const handleInputChange = e => {
     const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+    setValues({ ...formValues, [name]: value });
   };
   useEffect(() => {
     if (getToken()) {
@@ -29,15 +28,15 @@ const Login = props => {
       <div className="container">
         <form>
           <div className="form-group">
-            <label>Name</label>
+            <label>Username</label>
             <input
               type="text"
               className="form-control"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
-              placeholder="Enter name"
+              placeholder="Username"
               name="name"
-              value={values.name}
+              value={formValues.name}
               onChange={handleInputChange}
             />
           </div>
@@ -49,7 +48,7 @@ const Login = props => {
               id="exampleInputPassword1"
               placeholder="Password"
               name="password"
-              value={values.password}
+              value={formValues.password}
               onChange={handleInputChange}
             />
           </div>
@@ -65,7 +64,7 @@ const Login = props => {
             type="submit"
             className="btn btn-primary"
             onClick={handleSubmit}
-            disabled={!values.name || !values.password}
+            disabled={!formValues.name || !formValues.password}
           >
             Log in
           </button>

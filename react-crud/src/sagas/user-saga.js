@@ -74,21 +74,21 @@ function fetchUserAxios() {
   return http.get(`/users`);
 }
 function addUserAxios(newUser) {
-  return http.post("http://localhost:3001/users", {
+  return http.post("/users", {
     firstName: newUser.firstName,
     lastName: newUser.lastName,
     email: newUser.email
   });
 }
 function deleteUserAxios(userId) {
-  return http.delete("http://localhost:3001/users", {
+  return http.delete("/users", {
     data: {
       id: userId
     }
   });
 }
 function updateUserAxios(newUser) {
-  return http.put("http://localhost:3001/users", {
+  return http.put("/users", {
     id: newUser.id,
     firstName: newUser.firstName,
     lastName: newUser.lastName,

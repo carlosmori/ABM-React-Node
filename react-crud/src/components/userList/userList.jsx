@@ -10,7 +10,7 @@ const UserList = props => {
 
   useEffect(() => {
     dispatch(fetchUsers());
-  }, []);
+  }, [dispatch]);
 
   const addUser = () => {
     dispatch(setCurrentUser({ action: "Add User" }));

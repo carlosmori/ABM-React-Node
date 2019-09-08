@@ -1,16 +1,16 @@
 import { LOG_IN_SUCCESS, LOGOUT } from "../actions/types";
 const initialState = {
   session: {
-    name: null,
-    token: null,
+    name: "",
+    token: "",
     userLogged: false
   }
 };
 
-export default function(state = initialState, action) {
-  switch (action.type) {
+export default (state = initialState, { type, payload }) => {
+  switch (type) {
     case LOG_IN_SUCCESS:
-      let { token, name } = action.sessionObject;
+      let { token, name } = payload;
       token = token.split(" ")[1];
       return {
         ...state,
@@ -34,4 +34,4 @@ export default function(state = initialState, action) {
     default:
       return state;
   }
-}
+};

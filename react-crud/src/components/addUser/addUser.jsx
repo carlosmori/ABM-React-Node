@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const AddUser = () => {
   const dispatch = useDispatch();
-  const [values, setValues] = useState({
+  const [formValues, setValues] = useState({
     id: undefined,
     firstName: "",
     lastName: "",
@@ -18,17 +18,16 @@ const AddUser = () => {
     event.preventDefault();
 
     user.action === "Add User"
-      ? dispatch(addUser(values))
-      : dispatch(updateUser(values));
+      ? dispatch(addUser(formValues))
+      : dispatch(updateUser(formValues));
   };
   const handleInputChange = e => {
     const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
+    setValues({ ...formValues, [name]: value });
   };
   useEffect(() => {
     if (user.action === "Update") {
-      const { id, firstName, lastName, email } = user;
-      setValues({ id, firstName, lastName, email });
+      setValues({ ...user });
     }
   }, [user]);
   return (
@@ -55,7 +54,7 @@ const AddUser = () => {
                 id="firstName"
                 className="form-control "
                 placeholder="User Name"
-                value={values.firstName}
+                value={formValues.firstName}
                 onChange={handleInputChange}
               />
             </div>
@@ -68,7 +67,7 @@ const AddUser = () => {
                 id="lastName"
                 className="form-control "
                 placeholder="Last name"
-                value={values.lastName}
+                value={formValues.lastName}
                 onChange={handleInputChange}
               />
             </div>
@@ -81,7 +80,7 @@ const AddUser = () => {
                 id="email"
                 className="form-control "
                 placeholder="Email address"
-                value={values.email}
+                value={formValues.email}
                 onChange={handleInputChange}
               />
             </div>

@@ -2,11 +2,11 @@ var express = require("express");
 var router = express.Router();
 const loginController = require("../controller/login-controller");
 
-function wrapAsync(fn) {
+const wrapAsync = fn => {
   return function(req, res, next) {
     fn(req, res, next).catch(next);
   };
-}
+};
 /* GET home page. */
 router.get("/", function(req, res, next) {
   res.render("index", { title: "Express" });

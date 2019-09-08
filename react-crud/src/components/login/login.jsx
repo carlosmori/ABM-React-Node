@@ -3,7 +3,7 @@ import "./login.scss";
 import { logIn } from "../../actions/sessionActions.js";
 import { push } from "connected-react-router";
 import { useDispatch } from "react-redux";
-import { getToken } from "../../utils/authentication";
+import { isLoggedIn } from "../../utils/authentication";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const Login = () => {
     setValues({ ...formValues, [name]: value });
   };
   useEffect(() => {
-    if (getToken()) {
+    if (isLoggedIn()) {
       dispatch(push("/welcome/userList"));
     }
   });

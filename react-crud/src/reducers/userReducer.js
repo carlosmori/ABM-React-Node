@@ -7,7 +7,6 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  //Igualar a null a ver que pasa
   newUserFromRedux: {
     action: null,
     firstName: null,
@@ -16,10 +15,8 @@ const initialState = {
   },
   usersFromRedux: []
 };
-//refactorear a arrow function
-//export default (state = initialState, action) => {
 
-export default function(state = initialState, { type, payload }) {
+export default (state = initialState, { type, payload }) => {
   switch (type) {
     case FETCH_USERS_SUCCESS:
       return {
@@ -56,4 +53,4 @@ export default function(state = initialState, { type, payload }) {
     default:
       return state;
   }
-}
+};

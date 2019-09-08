@@ -1,11 +1,11 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import { getToken } from "../utils/authentication";
+import { isLoggedIn } from "../utils/authentication";
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      getToken() ? (
+      isLoggedIn() ? (
         <Component {...props} />
       ) : (
         <Redirect

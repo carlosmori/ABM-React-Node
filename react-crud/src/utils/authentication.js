@@ -9,9 +9,7 @@ const http = axios.create({
   }
 });
 http.interceptors.response.use(
-  response => {
-    return response;
-  },
+  response => response,
   error => {
     if (error.response && error.response.status === 401) {
       return Promise.reject("Email or Password invalid");
@@ -27,24 +25,10 @@ const setAuthorization = authorization => {
     localStorage.setItem(AUTHORIZATION_KEY_NAME, authorization);
   }
 };
-const unSetAuthorization = authorization => {
+const unSetAuthorization = () =>
   localStorage.removeItem(AUTHORIZATION_KEY_NAME);
-};
 
 // @todo isLoggedIn()
-const getToken = () => {
-  return localStorage.getItem(AUTHORIZATION_KEY_NAME);
-  // return userLogged ? true : false;
-};
+const isLoggedIn = () => localStorage.getItem(AUTHORIZATION_KEY_NAME);
 
-export {
-  http,
-  // getAuthorization,
-  setAuthorization,
-  unSetAuthorization,
-  getToken
-  // setUrlFrom,
-  // redirectAfterLogin,
-  // redirectToLogin,
-  // transformObjectToQueryString,
-};
+export { http, setAuthorization, unSetAuthorization, isLoggedIn };

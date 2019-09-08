@@ -70,31 +70,27 @@ export function* updateUser(action) {
     yield put({ type: "API_CALL_FAILURE", error });
   }
 }
-function fetchUserAxios() {
-  return http.get(`/users`);
-}
-function addUserAxios(newUser) {
-  return http.post("/users", {
+const fetchUserAxios = () => http.get(`/users`);
+const addUserAxios = newUser =>
+  http.post("/users", {
     firstName: newUser.firstName,
     lastName: newUser.lastName,
     email: newUser.email
   });
-}
-function deleteUserAxios(userId) {
-  return http.delete("/users", {
+const deleteUserAxios = userId =>
+  http.delete("/users", {
     data: {
       id: userId
     }
   });
-}
-function updateUserAxios(newUser) {
-  return http.put("/users", {
+const updateUserAxios = newUser => {
+  http.put("/users", {
     id: newUser.id,
     firstName: newUser.firstName,
     lastName: newUser.lastName,
     email: newUser.email
   });
-}
+};
 
 /**
  * User Sagas Watcher

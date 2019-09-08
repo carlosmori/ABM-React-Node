@@ -1,12 +1,12 @@
 var express = require("express");
 var router = express.Router();
+const userController = require("../controller/user-controller");
 
-function wrapAsync(fn) {
+const wrapAsync = fn => {
   return function(req, res, next) {
     fn(req, res, next).catch(next);
   };
-}
-const userController = require("../controller/user-controller");
+};
 router.get("/:id", wrapAsync(userController.getOne));
 router.get("/", wrapAsync(userController.getAll));
 router.post("/", wrapAsync(userController.create));

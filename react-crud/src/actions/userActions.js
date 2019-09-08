@@ -6,26 +6,18 @@ import {
   UPDATE_USER
 } from "./types.js";
 
-export const fetchUsers = () => {
-  return { type: FETCH_USERS };
-};
+export const fetchUsers = () => ({ type: FETCH_USERS });
 
-export const addUser = newUser => {
-  return { type: ADD_USER, payload: newUser };
-};
+export const addUser = newUser => ({ type: ADD_USER, payload: newUser });
 
-export const deleteUser = userId => {
-  return { type: DELETE_USER, payload: userId };
-};
+export const deleteUser = userId => ({ type: DELETE_USER, payload: userId });
 
 export const updateUser = newUser => ({
   type: UPDATE_USER,
   payload: newUser
 });
 
-export const setCurrentUser = user => {
-  return {
-    type: SET_CURRENT_USER,
-    payload: user
-  };
-};
+export const setCurrentUser = user => ({
+  type: SET_CURRENT_USER,
+  payload: user
+});

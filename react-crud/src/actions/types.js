@@ -14,7 +14,7 @@ export const LOGOUT = "LOGOUT";
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
 export const SET_TOKEN = "SET_TOKEN";
 
-// hacer acordar de que nombre le ponen en Noodle
+//@todo REFACTOR TO
 // export const loginActions = {
 //     REQUEST: "LOGIN_REQUEST",
 //     SUCCESS: "LOGIN_SUCCESS",

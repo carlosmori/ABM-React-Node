@@ -18,7 +18,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "pug": "2.0.0-beta11",
-    "sequelize": "^5.13.1"
+    "sequelize": "^5.15.1"
   },
   "devDependencies": {
     "faker": "^4.1.0",
